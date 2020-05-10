@@ -3,23 +3,22 @@ import {Text, View} from 'react-native';
 import {useQuery} from '@apollo/react-hooks'
 import styled from 'styled-components'
 import RANDOM_JOKE  from '../../apollo/queries'
-const Joke = (props) => {
+const Card = (props) => {
     const {palette, joke} = props
+    console.log(joke)
     const color = palette == undefined ? "000" : palette[0];
     const JokeText = styled.Text`
             color:#${color}
             padding:5px;
             font-size:50px;
             text-align:center;`
-        
-    const {loading, error, data} = useQuery(RANDOM_JOKE)
-
-    if(error)   return   <View>
-                            <Text>{error.name}</Text>
-                            <Text>{error.message}</Text>
-                        </View>
-                return  <View>
-                            <JokeText adjustsFontSizeToFit>{data.random.value}</JokeText>
-                        </View>
+    if(joke === undefined){
+        return  <View>
+                    <JokeText adjustsFontSizeToFit>Loading</JokeText>
+                </View>
+    }
+    return  <View>
+                <JokeText adjustsFontSizeToFit>{joke.random.value}</JokeText>
+            </View>
 }
-export default Joke
+export default Card

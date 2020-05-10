@@ -1,25 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import {Text, View, Button} from 'react-native';
-import  Joke from '../Joke'
+import Card from '../Card'
 import styled from 'styled-components'
 import palette from 'google-palette'
 import getRandomScheme from '../../utils/palettes'
+import RANDOM_JOKE  from '../../apollo/queries'
+import { useLazyQuery } from '@apollo/react-hooks';
 
 Display = () => {
+    const [getJoke,  {loading, data }] = useLazyQuery(RANDOM_JOKE, {
+      fetchPolicy: "no-cache"
+    })
     const [paletteScheme, setPaletteScheme] = useState("tol");
+    const [joke, setJoke] = useState();
     const currentPalette = palette(paletteScheme, 10) === null ? palette('tol', 10) : palette(paletteScheme, 10);
     const newJoke = () =>{
+      getJoke()
       setPaletteScheme(getRandomScheme())
+      setJoke(data)
     }
     useEffect(()=>{
-     console.log("current Scheme", paletteScheme)
-     console.log("current palette", currentPalette)
+     console.log("current joke", joke)
     })
     const JokeView = styled.View`
-      background:#000
+      background:#${currentPalette[currentPalette.length-2]}
     `;
+
+    if(loading){
+      return  <View>
+                  <Text>Loading</Text>
+              </View>
+    }
     return  <JokeView>
-                <Joke palette={currentPalette}/>
+                <Card palette={currentPalette} joke={joke}/>
                 <Button
                   title="New Joke"
                   onPress={newJoke}
