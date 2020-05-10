@@ -3,7 +3,6 @@ import {Text, View} from 'react-native';
 import {useQuery} from '@apollo/react-hooks'
 import styled from 'styled-components'
 import RANDOM_JOKE  from '../../apollo/queries'
-
 const Joke = (props) => {
     const {palette} = props
     const color = palette == undefined ? "000" : palette[0];
