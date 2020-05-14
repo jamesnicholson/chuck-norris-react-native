@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import RANDOM_JOKE  from '../../apollo/queries'
 const Card = (props) => {
     const {palette, joke} = props
-    console.log(joke)
     const color = palette == undefined ? "000" : palette[0];
     const JokeText = styled.Text`
             color:#${color}
