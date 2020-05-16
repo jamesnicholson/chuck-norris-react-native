@@ -6,4 +6,13 @@ import gql from 'graphql-tag'
             value
     }
  }`
+export const GET_CATEGORIES = gql`
+    query {
+        categories {
+            name
+        }
+    }
+`
+
+
 export default RANDOM_JOKE
