@@ -79,6 +79,8 @@ target 'ChuckNorrisApp' do
 
   pod 'RNSensors', :path => '../node_modules/react-native-sensors'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'ChuckNorrisAppTests' do
     inherit! :complete
     # Pods for testing

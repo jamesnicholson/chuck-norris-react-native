@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.sensors.RNSensorsPackage;
 import com.sensors.RNSensorsPackage;
 import com.facebook.react.ReactInstanceManager;
