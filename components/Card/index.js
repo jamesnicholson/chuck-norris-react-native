@@ -3,6 +3,7 @@ import {Text, View} from 'react-native';
 import styled from 'styled-components'
 const Card = (props) => {
     const {joke} = props
+    console.log(joke)
     const JokeText = styled.Text`
             color:#000000;
             padding:5px;
@@ -15,7 +16,7 @@ const Card = (props) => {
                 </View>
     }
     return  <View>
-                <JokeText adjustsFontSizeToFit>{joke.random.value}</JokeText>
+                <JokeText adjustsFontSizeToFit>{joke.getJoke.value}</JokeText>
             </View>
 }
 export default Card

@@ -5,14 +5,13 @@ import {Text, View, Button} from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
 import styled from 'styled-components'
 import {ThemeContext}  from '../../utils/userContext'
-const categories = ({navigation}) => {
 
-    const {category, setCategory} = useContext(ThemeContext);
+const categories = ({navigation}) => {
+    const { category, setCategory } = useContext(ThemeContext);
     const {loading, error, data} = useQuery(GET_CATEGORIES)
-    
-    const saveCategory = (category) => {
-          setCategory(category)
-          navigation.push('display')
+    const saveCategory = (name) => {
+        setCategory(name)
+        navigation.push('display')
     }
     const CategoryItem = styled.Text`
         background:#444444;
@@ -21,8 +20,8 @@ const categories = ({navigation}) => {
         margin:5px;
     `
     useEffect(() => {
-       // console.log(data)
-    },[data])
+        console.log(category)
+    },[category])
 
     if(loading){
         return(

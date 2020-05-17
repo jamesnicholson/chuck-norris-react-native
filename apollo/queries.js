@@ -13,6 +13,16 @@ export const GET_CATEGORIES = gql`
         }
     }
 `
+export const GET_JOKE_BY_CATEGORY = gql`
+  query getTheJoke($category: String!) {
+    getJoke(category: $category) {
+      id
+      icon_url
+      value
+    }
+  }
+`
+
 
 
 export default RANDOM_JOKE

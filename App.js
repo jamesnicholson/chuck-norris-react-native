@@ -8,22 +8,20 @@ import Display from './components/Display'
 import Categories from './components/Categories'
 
 export default App = () => {
-   const [category, setCategory] = useState("random");
-   const value = useMemo(() => ({ category, setCategory }), [category, setCategory]);
+   const [category, setCategory] = useState("food");
+   const [joke, setJoke] = useState(null);
+   const themeValue = useMemo(() => ({ category, setCategory, joke, setJoke  }), [category, setCategory, joke, setJoke]);
    const Stack = createStackNavigator();
    return   <ApolloProvider client={client}>
-               <ThemeContext.Provider value={value}>
+               <ThemeContext.Provider value={themeValue}>
                   <NavigationContainer>
-                     <Stack.Navigator>
+                     <Stack.Navigator screenOptions={{headerShown: false}}>
                         <Stack.Screen name="display" component={Display} />
                         <Stack.Screen name="categories" component={Categories} />
                      </Stack.Navigator>
-                     </NavigationContainer>
+                  </NavigationContainer>
                </ThemeContext.Provider>
             </ApolloProvider>
-
-      
 }
-   
 
 

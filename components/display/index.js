@@ -3,24 +3,24 @@ import {Text, View, Button} from 'react-native';
 import {ThemeContext}  from '../../utils/userContext'
 import { useLazyQuery } from '@apollo/react-hooks';
 import styled from 'styled-components'
-import RANDOM_JOKE  from '../../apollo/queries'
-
+import RANDOM_JOKE, { GET_JOKE_BY_CATEGORY }  from '../../apollo/queries'
 import Card from '../Card'
 
-
 Display = ({ navigation }) => {
-    const {category} = useContext(ThemeContext);
-    const [getJoke, {loading, data }] = useLazyQuery(RANDOM_JOKE, {
-      fetchPolicy: "no-cache"
+    const {category, setCategory} = useContext(ThemeContext);
+    const {joke, setJoke} = useContext(ThemeContext);
+    const [getJoke, {loading, data }] = useLazyQuery(GET_JOKE_BY_CATEGORY, {
+      fetchPolicy: "no-cache",
+      variables: { category: category ? category : 'dev' },
     })
-    const [joke, setJoke] = useState();
     const newJoke = () => {
       getJoke()
       setJoke(data)
+    
     }
     useEffect(()=>{
      if(data === undefined){
-       getJoke()
+       newJoke()
      }
     },[data])
 
@@ -31,23 +31,24 @@ Display = ({ navigation }) => {
       text-align:center;`
     const JokeView = styled.View`
       background:#eeeeee;`
+
     const JokeButton = styled.Button`
       color:#000000;
-      width:100%;`
+      background:#eeeeee;`
 
-    if(loading == true){
+    if(loading == true && joke !== null){
         return  <JokeView>
                   <JokeText adjustsFontSizeToFit>Loading</JokeText>
                 </JokeView>
     }
     return  <JokeView>
               <Text>{category}</Text>
-              <Button
+              <JokeButton
                   title="Categoryies"
                   onPress={() =>navigation.push('categories')}
                   />
               <Card joke={data}/>
-              <Button
+              <JokeButton
                   title="New Joke"
                   onPress={newJoke}
                 />
