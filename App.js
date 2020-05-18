@@ -6,7 +6,7 @@ import {ThemeContext} from './utils/userContext'
 import client from './apollo/client'
 import Display from './components/Display'
 import Categories from './components/Categories'
-
+import Search from './components/Search'
 export default App = () => {
    const [category, setCategory] = useState("food");
    const [joke, setJoke] = useState(null);
@@ -16,8 +16,10 @@ export default App = () => {
                <ThemeContext.Provider value={themeValue}>
                   <NavigationContainer>
                      <Stack.Navigator screenOptions={{headerShown: false}}>
+                        <Stack.Screen name="search" component={Search} />
                         <Stack.Screen name="display" component={Display} />
                         <Stack.Screen name="categories" component={Categories} />
+                       
                      </Stack.Navigator>
                   </NavigationContainer>
                </ThemeContext.Provider>

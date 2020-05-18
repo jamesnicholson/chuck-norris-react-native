@@ -3,11 +3,11 @@ import {Text, View, Button} from 'react-native';
 import {ThemeContext}  from '../../utils/userContext'
 import { useLazyQuery } from '@apollo/react-hooks';
 import styled from 'styled-components'
-import RANDOM_JOKE, { GET_JOKE_BY_CATEGORY }  from '../../apollo/queries'
+import { GET_JOKE_BY_CATEGORY }  from '../../apollo/queries'
 import Card from '../Card'
 
 Display = ({ navigation }) => {
-    const {category, setCategory} = useContext(ThemeContext);
+    const {category} = useContext(ThemeContext);
     const {joke, setJoke} = useContext(ThemeContext);
     const [getJoke, {loading, data }] = useLazyQuery(GET_JOKE_BY_CATEGORY, {
       fetchPolicy: "no-cache",
@@ -16,7 +16,6 @@ Display = ({ navigation }) => {
     const newJoke = () => {
       getJoke()
       setJoke(data)
-    
     }
     useEffect(()=>{
      if(data === undefined){
