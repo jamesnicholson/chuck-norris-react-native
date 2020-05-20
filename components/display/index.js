@@ -7,6 +7,7 @@ import { GET_JOKE_BY_CATEGORY }  from '../../apollo/queries'
 import Card from '../Card'
 
 Display = ({ navigation }) => {
+    
     const {category} = useContext(ThemeContext);
     const {joke, setJoke} = useContext(ThemeContext);
     const [getJoke, {loading, data }] = useLazyQuery(GET_JOKE_BY_CATEGORY, {

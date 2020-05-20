@@ -3,7 +3,7 @@ import {Text, View} from 'react-native';
 import styled from 'styled-components'
 const Card = (props) => {
     const {joke} = props
-    console.log(joke)
+
     const JokeText = styled.Text`
             color:#000000;
             padding:5px;

@@ -10,7 +10,9 @@ import Search from './components/Search'
 export default App = () => {
    const [category, setCategory] = useState("food");
    const [joke, setJoke] = useState(null);
-   const themeValue = useMemo(() => ({ category, setCategory, joke, setJoke  }), [category, setCategory, joke, setJoke]);
+   const [searchQuery, setSearchQuery] = useState(null);
+   const [jokesLoading, setJokesLoading] = useState(true);
+   const themeValue = useMemo(() => ({ category, setCategory, joke, setJoke , searchQuery, setSearchQuery, jokesLoading, setJokesLoading }), [category, setCategory, joke, setJoke, searchQuery, setSearchQuery, jokesLoading, setJokesLoading]);
    const Stack = createStackNavigator();
    return   <ApolloProvider client={client}>
                <ThemeContext.Provider value={themeValue}>
