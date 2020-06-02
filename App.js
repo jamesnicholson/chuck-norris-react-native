@@ -21,7 +21,6 @@ export default App = () => {
                         <Stack.Screen name="search" component={Search} />
                         <Stack.Screen name="display" component={Display} />
                         <Stack.Screen name="categories" component={Categories} />
-                       
                      </Stack.Navigator>
                   </NavigationContainer>
                </ThemeContext.Provider>

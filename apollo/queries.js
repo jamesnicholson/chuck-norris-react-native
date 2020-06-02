@@ -23,15 +23,15 @@ export const GET_JOKE_BY_CATEGORY = gql`
   }
 `
 export const SEARCH_FOR_JOKES = gql`
-  query searchForJokes($searchTerm: String!) {
+query searchJokes($searchTerm: String!) {
     search(searchTerm: $searchTerm){
       total
       result{
           id
           value
       }
-    }
   }
+}
 `
 
 

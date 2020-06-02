@@ -1,38 +1,37 @@
 import React, { useState, useEffect, useContext } from 'react'
-import {Text, View, ScrollView, TextInput, Button} from 'react-native';
-import { useLazyQuery } from '@apollo/react-hooks';
+import {Text, View, ScrollView} from 'react-native';
+import { useLazyQuery} from '@apollo/react-hooks';
 import {ThemeContext}  from '../../utils/userContext'
 import styled from 'styled-components'
 import { SEARCH_FOR_JOKES }  from '../../apollo/queries'
-import Result from './result'
-import SearchBar from './searchbar'
-Search = () =>{
-  const {jokesLoading, setJokesLoading} = useContext(ThemeContext);
-    const {searchQuery, setSearchQuery} = useContext(ThemeContext);
+import SearchInput from './SearchInput'
+NewSearch = () =>{
+    const [searchResults, setSearchResults ] = useState();
+    const {searchQuery} = useContext(ThemeContext);
+    const [search, {data}] = useLazyQuery(SEARCH_FOR_JOKES, { variables: { searchTerm: searchQuery}})
+
     useEffect(()=>{
-        console.log("searchQuery: ",searchQuery)
-    },[searchQuery])
+        setSearchResults(data)
+    },[data])
 
     const SearchView = styled.View`
         padding:5px;
-        color:#000000;
-        background:#393939;`
+        color:#3a7933;
+        background:#793362;`
 
     const SearchText = styled.Text`
-        color:#000000;
-        background-color: #eeeeee;`
-
-
-    const SearchTextInput= styled.TextInput`
-        color:#000000;
-        background:#eeeeee;`       
+        color:#3a0ca5;
+        background-color: #729db7;`   
 
       return <SearchView>
-                <Text>Search Page</Text>
-                <SearchBar />
-                {jokesLoading? <SearchView><SearchText>Loading</SearchText></SearchView> : null}
-                {jokesLoading === false ? <Result searchResult={searchQuery} /> : null}
-                
+                <SearchInput search={search} />
+                <ScrollView>
+                {
+                    searchResults === undefined ? null : searchResults.search.result.map((item, index) => {
+                        return <View key={index}><SearchText>{item.value}</SearchText></View>
+                    })
+                }
+                </ScrollView>
             </SearchView>
 }
-export default Search
+export default NewSearch

@@ -2,14 +2,14 @@ import React from 'react'
 import {Text, View} from 'react-native';
 import styled from 'styled-components'
 const Card = (props) => {
-    const {joke} = props
+    const {searchResults} = props
     const JokeText = styled.Text`
             color:#000000;
             padding:5px;
             font-size:50px;
             text-align:center;`
             
-    if(joke === undefined){
+    if(searchResults === undefined){
         return  <View>
                     <JokeText adjustsFontSizeToFit>Loading</JokeText>
                 </View>

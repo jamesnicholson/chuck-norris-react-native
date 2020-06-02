@@ -8,20 +8,32 @@ import styled from 'styled-components'
 const SearchBar = () => {
     const {jokesLoading, setJokesLoading} = useContext(ThemeContext);
     const {setSearchQuery} = useContext(ThemeContext);
-    const [searchTerm, setSearchTerm ] = useState("");
-    const [getJokes, {loading, data, error}] = useLazyQuery(SEARCH_FOR_JOKES, {
+    const [searchTerm, setSearchTerm ] = useState("fly");
+    const [search, {loading, data, error}] = useLazyQuery(SEARCH_FOR_JOKES, {
         fetchPolicy: "no-cache",
-        variables: { searchTerm: searchTerm }})
+        variables: { searchTerm }})
 
     useEffect(()=>{
         if(data !== undefined){
             setSearchQuery(data.search.result)
         }
     },[data])
+
     useEffect(()=>{
-        console.log("loading", loading);
+        if(data !== undefined){
+            setSearchQuery(data.search.result)
+        }
+    },[data])
+
+    useEffect(()=>{
         setJokesLoading(loading);
     },[loading])
+
+
+    const save = () =>{
+        console.log(searchTerm)
+        search()
+    }
 
     const SearchButton = styled.Button`
         width:80%;
@@ -35,7 +47,7 @@ const SearchBar = () => {
                     value={searchTerm}
                     />
                 <SearchButton 
-                    onPress={()=>(getJokes())}
+                    onPress={() => save()}
                     title="Search" />
             </View>
 }
