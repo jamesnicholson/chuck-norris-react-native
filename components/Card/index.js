@@ -6,7 +6,9 @@ const Card = (props) => {
     const JokeText = styled.Text`
             color:#000000;
             padding:5px;
-            font-size:50px;
+            margin:5px;
+            font-size:16px;
+            border:1px;
             text-align:center;`
             
     if(joke === undefined){

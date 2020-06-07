@@ -5,6 +5,7 @@ import { useLazyQuery } from '@apollo/react-hooks';
 import styled from 'styled-components'
 import { GET_JOKE_BY_CATEGORY }  from '../../apollo/queries'
 import Card from '../Card'
+import Header from '../Header'
 
 Display = ({ navigation }) => {
     
@@ -37,21 +38,18 @@ Display = ({ navigation }) => {
       background:#eeeeee;`
 
     if(loading == true && joke !== null){
-        return  <JokeView>
+        return  <View>
                   <JokeText adjustsFontSizeToFit>Loading</JokeText>
-                </JokeView>
+                </View>
     }
-    return  <JokeView>
-              <Text>{category}</Text>
-              <JokeButton
-                  title="Categoryies"
-                  onPress={() =>navigation.push('categories')}
-                  />
-              <Card joke={data}/>
+    return  <View>
+                <Header category={category} navigation={navigation}/>
+              <Card 
+                joke={data} />
               <JokeButton
                   title="New Joke"
                   onPress={newJoke}
                 />
-            </JokeView>
+            </View>
 }
 export default Display

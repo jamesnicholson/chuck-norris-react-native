@@ -5,6 +5,7 @@ import {ThemeContext}  from '../../utils/userContext'
 import styled from 'styled-components'
 import { SEARCH_FOR_JOKES }  from '../../apollo/queries'
 import SearchInput from './SearchInput'
+import Card from '../Card'
 NewSearch = () =>{
     const [searchResults, setSearchResults ] = useState();
     const {searchQuery} = useContext(ThemeContext);
@@ -28,7 +29,7 @@ NewSearch = () =>{
                 <ScrollView>
                 {
                     searchResults === undefined ? null : searchResults.search.result.map((item, index) => {
-                        return <View key={index}><SearchText>{item.value}</SearchText></View>
+                        return <View key={index}><Card joke={item.value} /></View>
                     })
                 }
                 </ScrollView>

@@ -17,9 +17,9 @@ export default App = () => {
    return   <ApolloProvider client={client}>
                <ThemeContext.Provider value={themeValue}>
                   <NavigationContainer>
-                     <Stack.Navigator screenOptions={{headerShown: false}}>
-                        <Stack.Screen name="search" component={Search} />
+                     <Stack.Navigator screenOptions={{gestureEnabled: true, gestureDirection:"horizontal"}} headerMode="none" animation="fade">
                         <Stack.Screen name="display" component={Display} />
+                        <Stack.Screen name="search" component={Search} />
                         <Stack.Screen name="categories" component={Categories} />
                      </Stack.Navigator>
                   </NavigationContainer>
